@@ -1,2 +1,4 @@
-package tn.esprit.immobilier.services;public interface IRoomService {
+package tn.esprit.immobilier.services;
+
+public interface IRoomService {
 }

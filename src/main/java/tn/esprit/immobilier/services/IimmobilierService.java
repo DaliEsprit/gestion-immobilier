@@ -1,2 +1,4 @@
-package tn.esprit.immobilier.services;public interface IimmobilierService {
+package tn.esprit.immobilier.services;
+
+public interface IimmobilierService {
 }

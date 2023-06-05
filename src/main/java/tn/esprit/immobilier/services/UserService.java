@@ -1,2 +1,4 @@
-package tn.esprit.immobilier.services;public class UserService {
+package tn.esprit.immobilier.services;
+
+public class UserService {
 }
