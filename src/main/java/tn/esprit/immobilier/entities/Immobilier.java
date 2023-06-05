@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import tn.esprit.immobilier.entities.enums.ImmoStatus;
 
@@ -23,5 +24,8 @@ public class Immobilier implements Serializable {
     private User seller;
     @ManyToOne
     private User buyer;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    private Room room;
 
 }

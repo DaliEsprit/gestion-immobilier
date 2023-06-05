@@ -1,12 +1,11 @@
 package tn.esprit.immobilier.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -25,4 +24,11 @@ public class User implements Serializable {
     private int phoneNumber;
     private String cin;
     private String address;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    private Jeton jeton;
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    private List<Room> rooms;
 }
