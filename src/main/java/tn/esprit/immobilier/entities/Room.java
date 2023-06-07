@@ -25,6 +25,6 @@ public class Room implements Serializable {
     private Immobilier immobilier;
     @ManyToOne(cascade = CascadeType.ALL)
     Jeton jeton;
-    @ManyToMany(mappedBy = "rooms",cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<User> userList;
 }

@@ -16,7 +16,7 @@ public class Position {
     private String log;
     private String lat;
 
-    @OneToOne(mappedBy="position")
+    @OneToOne
     private Immobilier immobilier;
 
     @OneToOne
