@@ -24,11 +24,11 @@ public class ImmobilierController {
                 immobilierService.ajouterImmobilier(c);
     }
     @DeleteMapping("/remove-immobilier/{immobilier-id}")
-    public void removeReservation(@PathVariable("immobilier-id") Long immobilierId) {
+    public void removeImmobilier(@PathVariable("immobilier-id") Long immobilierId) {
         immobilierService.deleteImmobilier(immobilierId);
     }
     @PutMapping("/modify-immobilier")
-    public Immobilier updateReservation(@RequestBody Immobilier immobilier) {
+    public Immobilier updateImmobilier(@RequestBody Immobilier immobilier) {
         return immobilierService.updateImmobilier(immobilier);
     }
 }
