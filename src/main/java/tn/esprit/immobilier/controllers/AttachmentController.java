@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 
-@RequestMapping("/Attachement")
+@RequestMapping("/attachement")
 public class AttachmentController {
     @Autowired
     IAttachmentService attachementService;
