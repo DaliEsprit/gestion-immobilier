@@ -5,9 +5,9 @@ import tn.esprit.immobilier.entities.Position;
 import java.util.List;
 
 public interface IPositionService {
-    List<Position> retrieveAllAttachement();
+    List<Position> retrieveAllPosition();
 
-    Position ajouterAttachement(Position c);
+    Position ajouterPosition(Position c);
 
     void deletePosition(Long id);
 
