@@ -9,7 +9,7 @@ public interface IPositionService {
 
     Position ajouterAttachement(Position c);
 
-    void deletePosition(Integer id);
+    void deletePosition(Long id);
 
     Position updatePosition(Position c);
 }
