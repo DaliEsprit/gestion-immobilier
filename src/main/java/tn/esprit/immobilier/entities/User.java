@@ -1,12 +1,10 @@
 package tn.esprit.immobilier.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,13 +24,12 @@ public class User implements Serializable {
     private int phoneNumber;
     private String cin;
     private String address;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Jeton jeton;
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-    HashedPWD hashedPWD;
-    boolean enabled;
+
+    String password;
+    boolean enabled=true;
 }

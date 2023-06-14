@@ -8,16 +8,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.immobilier.entities.User;
-import tn.esprit.immobilier.repositories.IUserReposiitory;
+import tn.esprit.immobilier.repositories.IUserRepository;
 
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-  @Autowired
-  IUserReposiitory userRepository;
 
+  @Autowired
+  IUserRepository userRepository;
   @Override
-  @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));

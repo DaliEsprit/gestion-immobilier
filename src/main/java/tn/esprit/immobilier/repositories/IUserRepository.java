@@ -5,6 +5,6 @@ import tn.esprit.immobilier.entities.User;
 
 import java.util.Optional;
 
-public interface IUserReposiitory extends JpaRepository<User,Long> {
+public interface IUserRepository extends JpaRepository<User,Long> {
    Optional<User> findByEmail(String email);
 }

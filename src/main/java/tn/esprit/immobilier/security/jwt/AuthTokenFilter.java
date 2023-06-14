@@ -34,7 +34,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
       String jwt = parseJwt(request);
       if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
         String username = jwtUtils.getUserNameFromJwtToken(jwt);
-
 //here caution
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
        // System.out.println("User Account Status on or off : "+userDetails.isEnabled());
