@@ -31,7 +31,7 @@ public class UserDetailsImpl implements UserDetails {
   public UserDetailsImpl(Long id, String username, String email, String password,Boolean enabled,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
-    this.username = username;
+    this.username = email;
     this.email = email;
     this.password = password;
     this.enabled = enabled;
@@ -44,10 +44,10 @@ public class UserDetailsImpl implements UserDetails {
         .collect(Collectors.toList());
 
     return new UserDetailsImpl(
-        user.getId(), 
-        null,
+        user.getId(),
         user.getEmail(),
-        user.getHashedPWD().getPassword(),
+        user.getEmail(),
+        user.getPassword(),
         user.isEnabled(),
         authorities);
   }

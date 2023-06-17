@@ -15,13 +15,13 @@ public class PositionService implements IPositionService{
 
 
     @Override
-    public List<Position> retrieveAllAttachement() {
+    public List<Position> retrieveAllPosition() {
         List<Position> listPosition= posRepository.findAll();
         return listPosition;
     }
 
     @Override
-    public Position ajouterAttachement(Position c) {
+    public Position ajouterPosition(Position c) {
         posRepository.save(c);
         return c;
     }
