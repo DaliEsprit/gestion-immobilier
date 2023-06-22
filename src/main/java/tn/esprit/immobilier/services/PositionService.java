@@ -28,7 +28,7 @@ public class PositionService implements IPositionService{
 
     @Override
     public void deletePosition(Integer id) {
-        posRepository.deleteById(id);
+        posRepository.deletePositionByIdPosition(id);
 
     }
 
