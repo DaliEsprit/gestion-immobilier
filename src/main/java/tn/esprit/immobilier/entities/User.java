@@ -26,6 +26,8 @@ public class User implements Serializable {
     private String address;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Notification> notifications;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Jeton jeton;

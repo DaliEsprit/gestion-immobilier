@@ -20,6 +20,7 @@ public class Immobilier implements Serializable {
     private ImmoStatus status;
     private String etat;
     private String description;
+
     @ManyToOne
     private User seller;
     @ManyToOne
