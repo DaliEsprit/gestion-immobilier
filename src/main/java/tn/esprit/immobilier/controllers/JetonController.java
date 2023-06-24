@@ -8,6 +8,7 @@ import tn.esprit.immobilier.services.IJetonService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/jeton")
 public class JetonController {
     IJetonService jetonService;
 

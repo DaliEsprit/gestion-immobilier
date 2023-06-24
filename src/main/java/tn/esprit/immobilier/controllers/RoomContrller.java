@@ -10,8 +10,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/API")
-
+@RequestMapping("/room")
 public class RoomContrller {
     IRoomService roomService;
 
