@@ -9,17 +9,8 @@ import tn.esprit.immobilier.repositories.IRoomRepository;
 
 import java.util.List;
 @Service
-<<<<<<< HEAD
-
 public class RoomService  implements IRoomService{
 
-
-=======
-
-
-public class RoomService  implements IRoomService{
-
->>>>>>> 5da6af37e6f214d95d17d6488b0f45e9264bcba4
     @Autowired
     IRoomRepository roomRepository;
 
@@ -35,20 +26,11 @@ public class RoomService  implements IRoomService{
         roomRepository.save(r);
         return r;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 5da6af37e6f214d95d17d6488b0f45e9264bcba4
     public List<Room> retrieveAllAttachement() {
         List<Room> listPosition= roomRepository.findAll();
         return listPosition;
     }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5da6af37e6f214d95d17d6488b0f45e9264bcba4
     @Override
     public void deleteRoom(Long id) {
           roomRepository.deleteById(id);
@@ -59,18 +41,11 @@ public class RoomService  implements IRoomService{
         roomRepository.save(r);
         return r;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 5da6af37e6f214d95d17d6488b0f45e9264bcba4
     public Room updatePosition(Room c) {
         roomRepository.save(c);
         return c;
 
     }
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 5da6af37e6f214d95d17d6488b0f45e9264bcba4
