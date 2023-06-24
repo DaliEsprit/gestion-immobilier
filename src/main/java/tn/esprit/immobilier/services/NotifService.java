@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.services;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Notification;
@@ -23,7 +24,7 @@ public class NotifService implements InotifService {
     @Override
     public Notification ajouterNotif(Notification notification) {
         inotifrepository.save(notification);
-        iRoomRepository.save(new Room(25252L,250,3));
+        iRoomRepository.save(new Room(25252L,250,3,null,null,null));
         return notification;
 
     }
