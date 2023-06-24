@@ -83,6 +83,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .authorizeRequests().antMatchers("/auth/signIn").permitAll()
             .and().authorizeRequests().antMatchers("/user/recovery/**").permitAll()
             .and().authorizeRequests().antMatchers("/pdf/generate").permitAll()
+            .and().authorizeRequests().antMatchers("/user").permitAll()
         .antMatchers("/api/test/**").permitAll()
         .anyRequest().permitAll();
     

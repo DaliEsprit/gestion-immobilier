@@ -12,11 +12,7 @@ import tn.esprit.immobilier.repositories.IRoomRepository;
 import java.util.List;
 @Service
 
-
 public class RoomService  implements IRoomService{
-
-
-
 
 
 
@@ -42,12 +38,10 @@ iNotification.save(new Notification(88455454L,"room-notification","il y a une re
         roomRepository.save(r);
         return r;
     }
-
     public List<Room> retrieveAllAttachement() {
         List<Room> listPosition= roomRepository.findAll();
         return listPosition;
     }
-
 
     @Override
     public void deleteRoom(Long id) {
@@ -59,7 +53,6 @@ iNotification.save(new Notification(88455454L,"room-notification","il y a une re
         roomRepository.save(r);
         return r;
     }
-
     public Room updatePosition(Room c) {
         roomRepository.save(c);
         return c;
