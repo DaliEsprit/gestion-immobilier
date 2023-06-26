@@ -9,7 +9,7 @@ import tn.esprit.immobilier.services.ImmoblierService;
 
 import java.util.List;
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/position")
 public class PositionController {
     @Autowired

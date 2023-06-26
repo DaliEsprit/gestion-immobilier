@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/jeton")
+@CrossOrigin("*")
 public class JetonController {
     IJetonService jetonService;
 

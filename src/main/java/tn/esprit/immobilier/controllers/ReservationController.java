@@ -8,7 +8,7 @@ import tn.esprit.immobilier.services.IReservationService;
 import java.util.List;
 
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/reservation")
 public class ReservationController {
     @Autowired

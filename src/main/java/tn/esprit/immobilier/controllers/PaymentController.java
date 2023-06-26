@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payment")
+@CrossOrigin("*")
 public class PaymentController {
     IPayementService iPayementService;
     @PostMapping("/add-payment")

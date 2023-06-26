@@ -10,7 +10,7 @@ import tn.esprit.immobilier.services.IPositionService;
 import java.util.List;
 
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/attachement")
 public class AttachmentController {
     @Autowired

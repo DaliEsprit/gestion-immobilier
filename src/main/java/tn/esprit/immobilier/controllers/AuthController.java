@@ -9,6 +9,7 @@ import tn.esprit.immobilier.services.IAuthService;
 
 @RestController
 @RequestMapping("auth")
+@CrossOrigin("*")
 public class AuthController {
     @Autowired
     IAuthService authService;
