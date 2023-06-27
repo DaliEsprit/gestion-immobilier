@@ -6,6 +6,7 @@ import tn.esprit.immobilier.entities.enums.ImmoStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -28,5 +29,7 @@ public class Immobilier implements Serializable {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Attachement>attachementList;
 
 }
