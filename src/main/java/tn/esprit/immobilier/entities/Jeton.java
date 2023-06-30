@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,9 @@ public class Jeton implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idJeton")
     private long idJeton; // Clé primaire
-    private int value;
-    @OneToOne( mappedBy ="jeton", cascade = CascadeType.REMOVE)
+    private String value;
+    @OneToOne(  cascade = CascadeType.ALL)
+    @JsonIgnore
      User user;
 
 }
