@@ -22,6 +22,6 @@ public class Jeton implements Serializable {
     private long idJeton; // Clé primaire
     private int value;
     @OneToOne( mappedBy ="jeton", cascade = CascadeType.REMOVE)
-    private User user;
+     User user;
 
 }

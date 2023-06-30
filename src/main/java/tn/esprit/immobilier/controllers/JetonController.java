@@ -36,4 +36,9 @@ public class JetonController {
     public Jeton updateJeton(@RequestBody Jeton jeton) {
         return jetonService.updateJeton(jeton);
     }
+
+    @GetMapping("/getJetonByUser/{userId}")
+    public Jeton getJetonByUser(@PathVariable("userId") long userId){
+        return jetonService.getJetonByUser(userId);
+    }
 }

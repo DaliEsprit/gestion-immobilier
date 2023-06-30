@@ -14,4 +14,6 @@ public interface IJetonService {
 
     Jeton updateJeton(Jeton j);
 
+    Jeton getJetonByUser(long userId);
+
 }

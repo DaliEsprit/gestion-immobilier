@@ -52,6 +52,12 @@ public class RoomService  implements IRoomService{
         roomRepository.save(r);
         return r;
     }
+
+    @Override
+    public Room getRoombyJeton(String value) {
+        return roomRepository.getRoomByJeton_Value(value);
+    }
+
     public Room updatePosition(Room c) {
         roomRepository.save(c);
         return c;
