@@ -35,5 +35,10 @@ public class NotifService implements InotifService {
 
     }
 
+    @Override
+    public List<Notification> getNotificationsByUser(long id) {
+        return inotifrepository.getNotificationbyUserId(id);
+    }
+
 
 }
