@@ -15,6 +15,5 @@ public interface IRoomService {
 
     Room updateRoom(Room r);
 
-    Room getRoombyJeton(String value);
 
 }

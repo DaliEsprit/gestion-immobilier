@@ -37,8 +37,5 @@ public class RoomContrller {
     public Room updateRoom(@RequestBody Room room) {
         return roomService.updateRoom(room);
     }
-    @GetMapping("/getRoomByJeton/{jentonValue}")
-    public Room getRoomByJeton(@PathVariable("jentonValue") String value){
-        return roomService.getRoombyJeton(value);
-    }
+
 }

@@ -24,7 +24,6 @@ public class NotifService implements InotifService {
     @Override
     public Notification ajouterNotif(Notification notification) {
         inotifrepository.save(notification);
-        iRoomRepository.save(new Room(25252L,250,3,null,null,null));
         return notification;
 
     }
