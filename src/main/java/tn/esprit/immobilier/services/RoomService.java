@@ -34,7 +34,6 @@ public class RoomService  implements IRoomService{
     @Override
     public Room ajouterRoom(Room r) {
 
-iNotification.save(new Notification(88455454L,"room-notification","il y a une reservation affecter au room"));
         roomRepository.save(r);
         return r;
     }
