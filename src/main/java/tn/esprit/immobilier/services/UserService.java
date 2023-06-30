@@ -3,9 +3,9 @@ package tn.esprit.immobilier.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import tn.esprit.immobilier.entities.Role;
 import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.repositories.IUserRepository;
+import tn.esprit.immobilier.security.services.UserDetailsImpl;
 
 import java.util.List;
 
@@ -15,7 +15,8 @@ public class UserService implements IUserService {
     IUserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    @Autowired
+    IAuthService authService;
     @Override
     public User createUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -40,5 +41,11 @@ public class UserService implements IUserService {
     public User update(User c) {
         userRepository.save(c);
         return c;
+    }
+
+    @Override
+    public User getCurrentInfo(){
+        UserDetailsImpl userDetails = authService.getCurrent();
+        return userRepository.findByEmail(userDetails.getEmail()).orElse(null);
     }
 }

@@ -12,4 +12,6 @@ public interface IUserService {
     void delete(Long id);
 
     User update(User c);
+
+    User getCurrentInfo();
 }

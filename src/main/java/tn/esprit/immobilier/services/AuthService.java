@@ -1,7 +1,6 @@
 package tn.esprit.immobilier.services;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,8 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class AuthService implements IAuthService {
-    IUserService userService;
-    IUserRepository userRepository;
+     IUserRepository userRepository;
 
     AuthenticationManager authenticationManager;
 
@@ -45,5 +43,10 @@ public class AuthService implements IAuthService {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles);
+    }
+
+    @Override
+    public UserDetailsImpl getCurrent(){
+       return (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

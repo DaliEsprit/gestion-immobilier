@@ -17,4 +17,9 @@ public class UserController {
     public User create(@RequestBody User user){
         return userService.createUser(user);
     }
+    @GetMapping("/current")
+    public User getCurrentInfo(){
+        return userService. getCurrentInfo();
+    }
+
 }

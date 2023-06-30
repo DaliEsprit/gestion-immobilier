@@ -81,11 +81,12 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeRequests().antMatchers("/signIn").permitAll()
+            .and() .authorizeRequests().antMatchers("/auth/**").permitAll()
             .and().authorizeRequests().antMatchers("/user/recovery/**").permitAll()
             .and().authorizeRequests().antMatchers("/pdf/generate").permitAll()
             .and().authorizeRequests().antMatchers("/user").permitAll()
         .antMatchers("/api/test/**").permitAll()
-        .anyRequest().permitAll();
+        .anyRequest().authenticated();
     
     http.authenticationProvider(authenticationProvider());
 

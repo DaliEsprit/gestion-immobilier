@@ -2,6 +2,7 @@ package tn.esprit.immobilier.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import tn.esprit.immobilier.entities.enums.RolesTypes;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,13 +20,14 @@ public class User implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private int age;
     private int phoneNumber;
     private String cin;
     private String address;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @Enumerated(EnumType.ORDINAL)
+    private RolesTypes role;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Notification> notifications;
     @JsonIgnore
