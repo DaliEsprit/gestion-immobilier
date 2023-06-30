@@ -4,17 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Jeton;
 import tn.esprit.immobilier.services.IJetonService;
+import tn.esprit.immobilier.services.JetonService;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/jeton")
+@CrossOrigin("*")
 public class JetonController {
-    IJetonService jetonService;
+     JetonService jetonService;
 
     @PostMapping("/add-jeton")
     public Jeton addJeton(@RequestBody Jeton jeton) {
-        return
-                jetonService.ajouterJeton(jeton);
+        return jetonService.ajouterJeton(jeton);
     }
 
 
@@ -33,5 +35,14 @@ public class JetonController {
     @PutMapping("/modify-jeton")
     public Jeton updateJeton(@RequestBody Jeton jeton) {
         return jetonService.updateJeton(jeton);
+    }
+
+    @GetMapping("/getJetonByUser/{userId}")
+    public Jeton getJetonByUser(@PathVariable("userId") long userId){
+        return jetonService.getJetonByUser(userId);
+    }
+    @GetMapping("/getJetonByRoom/{roomId}")
+    public List<Jeton> getJetonsbyRoom(@PathVariable("roomId") long roomId){
+        return  jetonService.getJetonbyRoom(roomId);
     }
 }

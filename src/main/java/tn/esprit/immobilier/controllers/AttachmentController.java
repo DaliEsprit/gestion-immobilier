@@ -10,7 +10,7 @@ import tn.esprit.immobilier.services.IPositionService;
 import java.util.List;
 
 @RestController
-
+@CrossOrigin("*")
 @RequestMapping("/attachement")
 public class AttachmentController {
     @Autowired
@@ -26,7 +26,7 @@ public class AttachmentController {
         return
                 attachementService.ajouterAttachement(c);
     }
-    @DeleteMapping("/remove-position/{attachement-id}")
+    @DeleteMapping("/remove-attachment/{attachement-id}")
     public void removeAttachement(@PathVariable("attachement-id") Long attachementId) {
         attachementService.deleteAttachement(attachementId);
     }

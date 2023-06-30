@@ -11,6 +11,7 @@ public interface InotifService {
     Notification ajouterNotif(Notification notification);
 
     void deleteNotification(Long id);
+    List<Notification> getNotificationsByUser(long id);
 
 
 }

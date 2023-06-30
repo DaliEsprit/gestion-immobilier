@@ -3,6 +3,7 @@ package tn.esprit.immobilier.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tn.esprit.immobilier.entities.Role;
 import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.repositories.IUserRepository;
 

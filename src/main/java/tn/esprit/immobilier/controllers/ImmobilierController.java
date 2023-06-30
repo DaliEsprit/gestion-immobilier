@@ -9,6 +9,7 @@ import java.util.List;
 @RestController
 
 @RequestMapping("/immobilier")
+@CrossOrigin("*")
 public class ImmobilierController {
     @Autowired
     ImmoblierService immobilierService;

@@ -29,4 +29,14 @@ public class JetonService implements IJetonService {
         jetonRepository.save(j);
         return j;
     }
+
+    @Override
+    public Jeton getJetonByUser(long userId) {
+        return jetonRepository.getJetonByUser_Id(userId);
+    }
+
+    @Override
+    public List<Jeton> getJetonbyRoom(long idRoom) {
+        return jetonRepository.getJetonsByRoom_Id(idRoom);
+    }
 }
