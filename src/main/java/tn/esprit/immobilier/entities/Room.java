@@ -23,8 +23,7 @@ public class Room implements Serializable {
     private int clientNumber;
     @OneToOne( mappedBy ="room", cascade = CascadeType.REMOVE)
     private Immobilier immobilier;
-    @ManyToOne(cascade = CascadeType.ALL)
-    Jeton jeton;
+
     @ManyToMany(cascade = CascadeType.REMOVE)
     private List<User> userList;
 }

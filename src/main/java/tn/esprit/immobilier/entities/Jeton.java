@@ -25,5 +25,6 @@ public class Jeton implements Serializable {
     @OneToOne(  cascade = CascadeType.ALL)
     @JsonIgnore
      User user;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    Room room;
 }
