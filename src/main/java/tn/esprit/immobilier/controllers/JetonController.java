@@ -41,4 +41,8 @@ public class JetonController {
     public Jeton getJetonByUser(@PathVariable("userId") long userId){
         return jetonService.getJetonByUser(userId);
     }
+    @GetMapping("/getJetonByRoom/{roomId}")
+    public List<Jeton> getJetonsbyRoom(@PathVariable("roomId") long roomId){
+        return  jetonService.getJetonbyRoom(roomId);
+    }
 }

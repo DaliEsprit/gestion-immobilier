@@ -34,4 +34,9 @@ public class JetonService implements IJetonService {
     public Jeton getJetonByUser(long userId) {
         return jetonRepository.getJetonByUser_Id(userId);
     }
+
+    @Override
+    public List<Jeton> getJetonbyRoom(long idRoom) {
+        return jetonRepository.getJetonsByRoom_Id(idRoom);
+    }
 }

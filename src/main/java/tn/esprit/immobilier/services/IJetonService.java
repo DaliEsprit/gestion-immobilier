@@ -15,5 +15,5 @@ public interface IJetonService {
     Jeton updateJeton(Jeton j);
 
     Jeton getJetonByUser(long userId);
-
+    List<Jeton> getJetonbyRoom(long idRoom);
 }
