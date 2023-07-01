@@ -12,6 +12,7 @@ import java.util.List;
 @RequestMapping("/jeton")
 @CrossOrigin("*")
 public class JetonController {
+ @Autowired
      JetonService jetonService;
 
     @PostMapping("/add-jeton")
