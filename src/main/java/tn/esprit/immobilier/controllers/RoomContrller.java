@@ -2,8 +2,10 @@ package tn.esprit.immobilier.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Room;
+import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.services.IRoomService;
 
 import java.util.List;
@@ -13,12 +15,12 @@ import java.util.List;
 @RequestMapping("/room")
 @CrossOrigin("*")
 public class RoomContrller {
+    @Autowired
     IRoomService roomService;
 
     @PostMapping("/add-room")
     public Room addRoom(@RequestBody Room r) {
-        return
-                roomService.ajouterRoom(r);
+        return roomService.ajouterRoom(r);
     }
     @Autowired
 
@@ -34,8 +36,17 @@ public class RoomContrller {
         roomService.deleteRoom(roomid);
     }
     @PutMapping("/modify-room")
+    @SendTo("/topic/greetings")
     public Room updateRoom(@RequestBody Room room) {
         return roomService.updateRoom(room);
+    }
+    @GetMapping("/retrieve-users-by-room/{idRoom}")
+    public List<User> getUsersByRoom(@PathVariable("idRoom") long idRoom){
+        return roomService.getUsersByRoom(idRoom);
+    }
+    @PutMapping("/assign-user-to-room/{idRoom}/{idUser}")
+    public String assignUserToRoom(@PathVariable("idRoom") long idRoom,@PathVariable("idUser") long idUser){
+        return roomService.assignUserToRoom(idUser,idRoom);
     }
 
 }

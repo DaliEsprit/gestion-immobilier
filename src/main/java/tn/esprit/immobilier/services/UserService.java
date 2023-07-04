@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Jeton;
 import tn.esprit.immobilier.entities.Room;
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.entities.enums.JetonStatus;
+import tn.esprit.immobilier.entities.enums.RolesTypes;
 import tn.esprit.immobilier.repositories.IJetonRepository;
 import tn.esprit.immobilier.repositories.IUserRepository;
 import tn.esprit.immobilier.security.services.UserDetailsImpl;
@@ -25,9 +27,11 @@ public class UserService implements IUserService {
     @Override
     public User createUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Jeton jeton=new Jeton(0,"empty",user,null);
-        user.setJeton(jeton);
-        jetonRepository.save(user.getJeton());
+        if(user.getRole()== RolesTypes.ROLE_BUYER) {
+            Jeton jeton = new Jeton(0, "", JetonStatus.Basic, user, null);
+            user.setJeton(jeton);
+            jetonRepository.save(user.getJeton());
+        }
         return userRepository.save(user);
     }
 

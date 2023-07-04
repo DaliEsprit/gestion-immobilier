@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import tn.esprit.immobilier.entities.enums.JetonStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Jeton implements Serializable {
     @Column(name="idJeton")
     private long idJeton; // Clé primaire
     private String value;
+    private JetonStatus jetonStatus;
     @OneToOne(  cascade = CascadeType.ALL)
     @JsonIgnore
      User user;

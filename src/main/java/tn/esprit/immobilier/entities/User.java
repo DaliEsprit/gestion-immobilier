@@ -36,4 +36,7 @@ public class User implements Serializable {
 
     String password;
     boolean enabled=true;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    Room room;
 }
