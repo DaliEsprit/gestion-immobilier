@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Room;
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.services.IRoomService;
 
 import java.util.List;

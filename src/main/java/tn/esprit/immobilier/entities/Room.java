@@ -2,6 +2,7 @@ package tn.esprit.immobilier.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import tn.esprit.immobilier.entities.enums.RoomStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public class Room implements Serializable {
     private String jetonValue;
     private boolean premiumRoom;
     private boolean goldRoom;
+    private RoomStatus roomStatus;
     @OneToOne( mappedBy ="room", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Immobilier immobilier;

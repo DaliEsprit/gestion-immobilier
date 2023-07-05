@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.services;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.immobilier.entities.*;
 import tn.esprit.immobilier.entities.enums.JetonStatus;
+import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
 
@@ -60,6 +62,7 @@ public class RoomService  implements IRoomService{
     public Room ajouterRoom(Room r) {
         roomStatusUpdate(r);
         r.setClientNumber(0);
+        r.setRoomStatus(RoomStatus.NotStarted);
         roomRepository.save(r);
         return r;
     }
@@ -90,6 +93,7 @@ public class RoomService  implements IRoomService{
     public String assignUserToRoom(long idUser, long idRoom) {
         User user=iUserRepository.findById(idUser).get();
         Room room=roomRepository.findById(idRoom).get();
+        JSONObject response = new JSONObject();
         if(user.getJeton().getJetonStatus()== JetonStatus.Gold) {
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
             iJetonRepository.save(user.getJeton());
@@ -107,10 +111,11 @@ public class RoomService  implements IRoomService{
                 user.setRoom(room);
                 iUserRepository.save(user);
                 roomRepository.save(room);
-                return "Access Granted";
+            response.put("message", "Access Granted");
+                return response.toString();
             }
-
-        return "Access Refused";
+        response.put("message", "Access Refused");
+        return response.toString();
     }
 
 
