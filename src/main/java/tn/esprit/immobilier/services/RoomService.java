@@ -98,7 +98,7 @@ public class RoomService  implements IRoomService{
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
             iJetonRepository.save(user.getJeton());
         }
-        else if (user.getJeton().getJetonStatus()== JetonStatus.Premieum && room.isPremiumRoom() && !room.isGoldRoom()){
+        else if (user.getJeton().getJetonStatus()== JetonStatus.Premieum &&(room.isPremiumRoom() && !room.isGoldRoom())||(!room.isPremiumRoom()&& !room.isGoldRoom())){
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
             iJetonRepository.save(user.getJeton());
         }
