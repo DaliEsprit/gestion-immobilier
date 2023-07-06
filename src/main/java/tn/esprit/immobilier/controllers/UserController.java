@@ -1,6 +1,8 @@
 package tn.esprit.immobilier.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.services.IUserService;
@@ -18,8 +20,15 @@ public class UserController {
         return userService.createUser(user);
     }
     @GetMapping("/current")
-    public User getCurrentInfo(){
-        return userService. getCurrentInfo();
+    public ResponseEntity getCurrentInfo(){
+        try {
+            userService. getCurrentInfo();
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build() ;
+
+        }
+        return ResponseEntity.accepted().build() ;
     }
 
 }

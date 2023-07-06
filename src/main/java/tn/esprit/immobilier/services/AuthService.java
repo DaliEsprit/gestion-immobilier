@@ -1,6 +1,9 @@
 package tn.esprit.immobilier.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class AuthService implements IAuthService {
+
      IUserRepository userRepository;
 
     AuthenticationManager authenticationManager;
@@ -28,6 +32,7 @@ public class AuthService implements IAuthService {
 
     @Override
     public JwtResponse signIn(LoginDTO loginDTO) {
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
@@ -49,4 +54,7 @@ public class AuthService implements IAuthService {
     public UserDetailsImpl getCurrent(){
        return (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+//    @Override
+//    public void
 }

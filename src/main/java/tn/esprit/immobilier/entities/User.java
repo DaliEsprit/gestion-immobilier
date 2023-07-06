@@ -33,7 +33,7 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Jeton jeton;
-
+    private boolean mailVerified=false;
     String password;
     boolean enabled=true;
 }
