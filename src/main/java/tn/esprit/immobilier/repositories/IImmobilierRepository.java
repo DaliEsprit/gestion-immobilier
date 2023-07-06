@@ -5,4 +5,5 @@ import tn.esprit.immobilier.entities.Immobilier;
 import tn.esprit.immobilier.entities.Jeton;
 
 public interface IImmobilierRepository  extends JpaRepository<Immobilier,Long> {
+    Immobilier getImmobilierByRoom_Id(long idRoom);
 }

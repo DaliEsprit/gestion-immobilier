@@ -24,6 +24,7 @@ public class Jeton implements Serializable {
     private long idJeton; // Clé primaire
     private String value;
     private JetonStatus jetonStatus;
+    private double bidValue;
     @OneToOne(  cascade = CascadeType.ALL)
     @JsonIgnore
      User user;

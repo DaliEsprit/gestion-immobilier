@@ -28,7 +28,7 @@ public class UserService implements IUserService {
     public User createUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if(user.getRole()== RolesTypes.ROLE_BUYER) {
-            Jeton jeton = new Jeton(0, "", JetonStatus.Basic, user, null);
+            Jeton jeton = new Jeton(0, "", JetonStatus.Basic,0, user, null);
             user.setJeton(jeton);
             jetonRepository.save(user.getJeton());
         }

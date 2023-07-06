@@ -18,7 +18,7 @@ public class Room implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int minAmount;
+    private double minAmount;
     private int clientNumber;
     private String jetonValue;
     private boolean premiumRoom;

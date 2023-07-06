@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.immobilier.entities.*;
 import tn.esprit.immobilier.entities.enums.JetonStatus;
+import tn.esprit.immobilier.entities.enums.RolesTypes;
 import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
@@ -20,10 +21,8 @@ import java.util.Random;
 
 public class RoomService  implements IRoomService{
 
-
-
-
-
+     @Autowired
+     IImmobilierRepository iImmobilierRepository;
     @Autowired
     IRoomRepository roomRepository;
     INotification iNotification;
@@ -95,15 +94,15 @@ public class RoomService  implements IRoomService{
         Room room=roomRepository.findById(idRoom).get();
         JSONObject response = new JSONObject();
         if(user.getJeton().getJetonStatus()== JetonStatus.Gold) {
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
+            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if (user.getJeton().getJetonStatus()== JetonStatus.Premieum &&(room.isPremiumRoom() && !room.isGoldRoom())||(!room.isPremiumRoom()&& !room.isGoldRoom())){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
+            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if(user.getJeton().getJetonStatus()== JetonStatus.Basic && !room.isPremiumRoom()&& !room.isGoldRoom()){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user,room));
+            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         if(user.getJeton().getValue()==room.getJetonValue()) {
@@ -116,6 +115,28 @@ public class RoomService  implements IRoomService{
             }
         response.put("message", "Access Refused");
         return response.toString();
+    }
+
+    @Override
+    public String assignImmobiliereToRoom(long idUser,long idImmo, long idRoom) {
+        JSONObject response = new JSONObject();
+        User user=iUserRepository.findById(idUser).get();
+        if(user.getRole()== RolesTypes.ROLE_SELLER ||user.getRole()==RolesTypes.ROLE_ADMIN  ) {
+            Immobilier immobilier = iImmobilierRepository.findById(idImmo).get();
+            Room room = roomRepository.findById(idRoom).get();
+            room.setImmobilier(immobilier);
+            roomRepository.save(room);
+            immobilier.setRoom(room);
+            immobilier.setUser(user);
+            iImmobilierRepository.save(immobilier);
+            return response.put("message", "Success").toString();
+        }
+        return response.put("message", "failed").toString();
+    }
+
+    @Override
+    public Immobilier getImmobiliereByRoom(long idRoom) {
+        return iImmobilierRepository.getImmobilierByRoom_Id(idRoom);
     }
 
 
