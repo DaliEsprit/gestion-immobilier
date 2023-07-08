@@ -14,6 +14,7 @@ import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -58,12 +59,19 @@ public class RoomService  implements IRoomService{
         }
     }
     @Override
-    public Room ajouterRoom(Room r) {
-        roomStatusUpdate(r);
-        r.setClientNumber(0);
-        r.setRoomStatus(RoomStatus.NotStarted);
-        roomRepository.save(r);
-        return r;
+    public Room ajouterRoom(Room r,long userId) {
+        User user=iUserRepository.findById(userId).get();
+        if(user.getRole()==RolesTypes.ROLE_SELLER||user.getRole()==RolesTypes.ROLE_ADMIN) {
+            roomStatusUpdate(r);
+            r.setClientNumber(0);
+            r.setRoomStatus(RoomStatus.NotStarted);
+            r.setUser(user);
+            user.getRoomList().add(r);
+            user.setRoomList(user.getRoomList());
+            iUserRepository.save(user);
+            return r;
+        }
+        return null;
     }
     public List<Room> retrieveAllAttachement() {
         List<Room> listPosition= roomRepository.findAll();
@@ -137,6 +145,16 @@ public class RoomService  implements IRoomService{
     @Override
     public Immobilier getImmobiliereByRoom(long idRoom) {
         return iImmobilierRepository.getImmobilierByRoom_Id(idRoom);
+    }
+
+    @Override
+    public List<Room> getListRoomByUser(long idUser) {
+        return roomRepository.getRoomsByUser_Id(idUser);
+    }
+
+    @Override
+    public Room getRoomById(long idRoom) {
+        return roomRepository.getRoomById(idRoom);
     }
 
 

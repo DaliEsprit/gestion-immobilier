@@ -6,6 +6,7 @@ import tn.esprit.immobilier.entities.enums.RoomStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,11 +25,15 @@ public class Room implements Serializable {
     private boolean premiumRoom;
     private boolean goldRoom;
     private RoomStatus roomStatus;
+    private boolean approvedRoom;
     @OneToOne( mappedBy ="room", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Immobilier immobilier;
 
     @OneToMany(mappedBy = "room",cascade = CascadeType.REMOVE)
     @JsonIgnore
-    private List<User> userList;
+    private List<User> userList=new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+     User user;
 }

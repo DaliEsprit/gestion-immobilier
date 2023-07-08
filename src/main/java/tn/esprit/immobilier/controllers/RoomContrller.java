@@ -20,9 +20,9 @@ public class RoomContrller {
     @Autowired
     IRoomService roomService;
 
-    @PostMapping("/add-room")
-    public Room addRoom(@RequestBody Room r) {
-        return roomService.ajouterRoom(r);
+    @PostMapping("/add-room/{idUser}")
+    public Room addRoom(@RequestBody Room r,@PathVariable("idUser") long idUser) {
+        return roomService.ajouterRoom(r,idUser);
     }
     // http://localhost:8089/api/immobilier/retrieve-all-immobilier
     @GetMapping("/retrieve-all-room")
@@ -56,5 +56,14 @@ public class RoomContrller {
     public Immobilier getImmobilierByRoom(@PathVariable("idRoom") long idRoom){
         return roomService.getImmobiliereByRoom(idRoom);
     }
+    @GetMapping("retrieve-rooms-by-user/{userId}")
+    public List<Room> getRoomByUser(@PathVariable("userId") long userId){
+        return roomService.getListRoomByUser(userId);
+    }
+    @GetMapping("retrieve-room-by-id/{idRoom}")
+    public Room  getRoombyId(@PathVariable("idRoom") long idRoom){
+        return  roomService.getRoomById(idRoom);
+    }
+
 
 }
