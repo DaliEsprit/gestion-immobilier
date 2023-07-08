@@ -35,9 +35,9 @@ public class JetonController {
     public void removeJeton(@PathVariable("jeton-id") Long jetonid) {
         jetonService.deleteJeton(jetonid);
     }
-    @PutMapping("/modify-jeton")
-    public Jeton updateJeton(@RequestBody Jeton jeton) {
-        return jetonService.updateJeton(jeton);
+    @PutMapping("/modify-jeton/{idUser}/{idRoom}")
+    public Jeton updateJeton(@RequestBody Jeton jeton,@PathVariable("idUser") long iduser,@PathVariable("idRoom") long idRoom) {
+        return jetonService.updateJeton(jeton,iduser,idRoom);
     }
 
     @GetMapping("/getJetonByUser/{userId}")
@@ -47,5 +47,9 @@ public class JetonController {
     @GetMapping("/getJetonByRoom/{roomId}")
     public List<Jeton> getJetonsbyRoom(@PathVariable("roomId") long roomId){
         return  jetonService.getJetonbyRoom(roomId);
+    }
+    @PutMapping("/update-jeton-bid-value/{jetonId}/{amount}")
+    public Jeton updateJetonBidValue (@PathVariable("jetonId") long jetonid,@PathVariable("amount")double amount){
+        return  jetonService.updateUserBidAmount(jetonid,amount);
     }
 }
