@@ -64,6 +64,10 @@ public class RoomContrller {
     public Room  getRoombyId(@PathVariable("idRoom") long idRoom){
         return  roomService.getRoomById(idRoom);
     }
+    @PutMapping("exit-room/{idUser}")
+    public void ExitRoom(@PathVariable("idUser") long idUser){
+        roomService.ExitRoom(idUser);
+    }
 
 
 }

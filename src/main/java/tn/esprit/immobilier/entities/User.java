@@ -35,7 +35,6 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Jeton jeton;
-
     String password;
     boolean enabled=true;
     @ManyToOne(cascade = CascadeType.ALL)
