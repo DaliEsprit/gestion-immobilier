@@ -106,6 +106,9 @@ public class RoomService  implements IRoomService{
                 if (user.getRoom().getId() == room.getId()) {
                     user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
                 }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+
             }
             else
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
@@ -116,6 +119,8 @@ public class RoomService  implements IRoomService{
                 if(user.getRoom().getId()==room.getId()){
                     user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user.getJeton().getBidValue(),user,room));
                 }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             }
             else
                 user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
@@ -126,6 +131,8 @@ public class RoomService  implements IRoomService{
                 if (user.getRoom().getId() == room.getId()) {
                     user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
                 }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             }
             else
                 user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
