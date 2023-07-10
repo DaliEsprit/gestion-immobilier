@@ -18,6 +18,7 @@ public interface IRoomService {
     Immobilier getImmobiliereByRoom(long idRoom);
     List<Room> getListRoomByUser(long idUser);
     Room getRoomById(long idRoom);
+    void ExitRoom(long idUser);
 
 
 }

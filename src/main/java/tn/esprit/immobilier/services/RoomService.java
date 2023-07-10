@@ -102,15 +102,33 @@ public class RoomService  implements IRoomService{
         Room room=roomRepository.findById(idRoom).get();
         JSONObject response = new JSONObject();
         if(user.getJeton().getJetonStatus()== JetonStatus.Gold) {
+            if(user.getRoom()!=null) {
+                if (user.getRoom().getId() == room.getId()) {
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
+                }
+            }
+            else
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if (user.getJeton().getJetonStatus()== JetonStatus.Premieum &&(room.isPremiumRoom() && !room.isGoldRoom())||(!room.isPremiumRoom()&& !room.isGoldRoom())){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            if(user.getRoom()!=null){
+                if(user.getRoom().getId()==room.getId()){
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user.getJeton().getBidValue(),user,room));
+                }
+            }
+            else
+                user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if(user.getJeton().getJetonStatus()== JetonStatus.Basic && !room.isPremiumRoom()&& !room.isGoldRoom()){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            if(user.getRoom()!=null) {
+                if (user.getRoom().getId() == room.getId()) {
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
+                }
+            }
+            else
+                user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         if(user.getJeton().getValue()==room.getJetonValue()) {
@@ -155,6 +173,13 @@ public class RoomService  implements IRoomService{
     @Override
     public Room getRoomById(long idRoom) {
         return roomRepository.getRoomById(idRoom);
+    }
+
+    @Override
+    public void ExitRoom(long idUser) {
+        User user=iUserRepository.findById(idUser).get();
+        user.setRoom(null);
+        iUserRepository.save(user);
     }
 
 
