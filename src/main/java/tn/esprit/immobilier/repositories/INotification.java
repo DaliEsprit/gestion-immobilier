@@ -8,6 +8,6 @@ import tn.esprit.immobilier.entities.User;
 import java.util.List;
 
 public interface INotification extends JpaRepository<Notification,Long> {
-    @Query(value = "select * from Notification not  where not.user.id=?1",nativeQuery = true)
+    @Query(value = "select * from Notification noti  where noti.user.id=?1",nativeQuery = true)
     List<Notification> getNotificationbyUserId(long userId);
 }

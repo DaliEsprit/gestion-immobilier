@@ -23,9 +23,7 @@ public class Immobilier implements Serializable {
     private String description;
 
     @ManyToOne
-    private User seller;
-    @ManyToOne
-    private User buyer;
+    private User user;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;

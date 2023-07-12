@@ -5,7 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.security.jwt.JwtResponse;
 import tn.esprit.immobilier.services.IUserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("user")
@@ -16,8 +19,8 @@ public class UserController {
     IUserService userService;
 
     @PostMapping
-    public User create(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<JwtResponse> create(@RequestBody User user){
+        return ResponseEntity.ok(userService.createUser(user));
     }
     @GetMapping("/current")
     public ResponseEntity getCurrentInfo(){
@@ -29,6 +32,10 @@ public class UserController {
 
         }
         return ResponseEntity.accepted().build() ;
+    }
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers(){
+        return userService.retrieveAllReservation();
     }
 
 }

@@ -16,7 +16,7 @@ public class Notification {
     private Long idNotif;
     private String title;
     private String message;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
 }

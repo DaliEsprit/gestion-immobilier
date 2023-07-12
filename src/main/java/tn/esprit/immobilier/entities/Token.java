@@ -21,5 +21,5 @@ public class Token implements Serializable {
     private String token;
     @ManyToOne
     private User user;
-    boolean enabled=true;
+    private boolean enabled=true;
 }

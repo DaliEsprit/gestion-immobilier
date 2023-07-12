@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Jeton;
@@ -11,7 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/jeton")
 @CrossOrigin("*")
+@AllArgsConstructor
 public class JetonController {
+ @Autowired
      JetonService jetonService;
 
     @PostMapping("/add-jeton")

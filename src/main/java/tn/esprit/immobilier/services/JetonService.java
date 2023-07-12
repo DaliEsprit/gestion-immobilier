@@ -1,11 +1,14 @@
 package tn.esprit.immobilier.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Jeton;
 import tn.esprit.immobilier.repositories.IJetonRepository;
 
 import java.util.List;
-
+@Service
 public class JetonService implements IJetonService {
+   @Autowired
     IJetonRepository jetonRepository;
     @Override
     public List<Jeton> retrieveAllJeton() {
