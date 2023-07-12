@@ -189,6 +189,19 @@ public class RoomService  implements IRoomService{
         iUserRepository.save(user);
     }
 
+    @Override
+    public void updateTimeRoom(long idRoom,long timeRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+        room.setTimeRoom(timeRoom);
+        roomRepository.save(room);
+    }
+
+    @Override
+    public float getRoomTime(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+        return room.getTimeRoom();
+    }
+
 
     public Room updatePosition(Room c) {
         roomRepository.save(c);

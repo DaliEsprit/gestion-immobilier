@@ -68,6 +68,13 @@ public class RoomContrller {
     public void ExitRoom(@PathVariable("idUser") long idUser){
         roomService.ExitRoom(idUser);
     }
-
+    @PutMapping("update-time-room/{idRoom}/{time}")
+    public void updateTimeRoom(@PathVariable("idRoom") long idRoom,@PathVariable("time") long time){
+        this.roomService.updateTimeRoom(idRoom,time);
+    }
+    @GetMapping("get-room-time/{idRoom}")
+    public float getRoomTime(@PathVariable("idRoom") long idRoom){
+        return roomService.getRoomTime(idRoom);
+    }
 
 }

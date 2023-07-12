@@ -19,6 +19,8 @@ public interface IRoomService {
     List<Room> getListRoomByUser(long idUser);
     Room getRoomById(long idRoom);
     void ExitRoom(long idUser);
+    void updateTimeRoom(long idRoom,long timeRoom);
+    float getRoomTime(long idRoom);
 
 
 }
