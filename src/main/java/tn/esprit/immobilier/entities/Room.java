@@ -26,6 +26,7 @@ public class Room implements Serializable {
     private boolean goldRoom;
     private RoomStatus roomStatus;
     private boolean approvedRoom;
+    private float timeRoom;
     @OneToOne( mappedBy ="room", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Immobilier immobilier;
