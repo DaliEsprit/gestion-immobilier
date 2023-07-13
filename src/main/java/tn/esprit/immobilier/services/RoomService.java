@@ -183,10 +183,15 @@ public class RoomService  implements IRoomService{
     }
 
     @Override
-    public void ExitRoom(long idUser) {
+    public void ExitRoom(long idUser,long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
         User user=iUserRepository.findById(idUser).get();
         user.setRoom(null);
+        room.setClientNumber(room.getClientNumber()-1);
+        if(room.getClientNumber()==-1)
+            room.setClientNumber(0);
         iUserRepository.save(user);
+        roomRepository.save(room);
     }
 
     @Override
