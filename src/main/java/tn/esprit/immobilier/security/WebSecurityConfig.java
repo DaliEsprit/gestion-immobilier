@@ -86,6 +86,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .and().authorizeRequests().antMatchers("/pdf/generate").permitAll()
             .and().authorizeRequests().antMatchers("/user").permitAll()
             .and().authorizeRequests().antMatchers("/ws/**").permitAll()
+            .and().authorizeRequests().antMatchers("/swagger-ui/**").permitAll()
+            .and().authorizeRequests().antMatchers("/v3/**").permitAll()
             .antMatchers("/api/test/**").permitAll()
         .anyRequest().authenticated();
     
