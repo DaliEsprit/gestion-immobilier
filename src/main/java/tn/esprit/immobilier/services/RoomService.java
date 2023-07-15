@@ -14,6 +14,7 @@ import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -58,12 +59,19 @@ public class RoomService  implements IRoomService{
         }
     }
     @Override
-    public Room ajouterRoom(Room r) {
-        roomStatusUpdate(r);
-        r.setClientNumber(0);
-        r.setRoomStatus(RoomStatus.NotStarted);
-        roomRepository.save(r);
-        return r;
+    public Room ajouterRoom(Room r,long userId) {
+        User user=iUserRepository.findById(userId).get();
+        if(user.getRole()==RolesTypes.ROLE_SELLER||user.getRole()==RolesTypes.ROLE_ADMIN) {
+            roomStatusUpdate(r);
+            r.setClientNumber(0);
+            r.setRoomStatus(RoomStatus.NotStarted);
+            r.setUser(user);
+            user.getRoomList().add(r);
+            user.setRoomList(user.getRoomList());
+            iUserRepository.save(user);
+            return r;
+        }
+        return null;
     }
     public List<Room> retrieveAllAttachement() {
         List<Room> listPosition= roomRepository.findAll();
@@ -94,15 +102,40 @@ public class RoomService  implements IRoomService{
         Room room=roomRepository.findById(idRoom).get();
         JSONObject response = new JSONObject();
         if(user.getJeton().getJetonStatus()== JetonStatus.Gold) {
+            if(user.getRoom()!=null) {
+                if (user.getRoom().getId() == room.getId()) {
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
+                }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+
+            }
+            else
             user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if (user.getJeton().getJetonStatus()== JetonStatus.Premieum &&(room.isPremiumRoom() && !room.isGoldRoom())||(!room.isPremiumRoom()&& !room.isGoldRoom())){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            if(user.getRoom()!=null){
+                if(user.getRoom().getId()==room.getId()){
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),user.getJeton().getBidValue(),user,room));
+                }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            }
+            else
+                user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         else if(user.getJeton().getJetonStatus()== JetonStatus.Basic && !room.isPremiumRoom()&& !room.isGoldRoom()){
-            user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            if(user.getRoom()!=null) {
+                if (user.getRoom().getId() == room.getId()) {
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(), room.getJetonValue(), user.getJeton().getJetonStatus(), user.getJeton().getBidValue(), user, room));
+                }
+                else
+                    user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
+            }
+            else
+                user.setJeton(new Jeton(user.getJeton().getIdJeton(),room.getJetonValue(),user.getJeton().getJetonStatus(),room.getMinAmount(),user,room));
             iJetonRepository.save(user.getJeton());
         }
         if(user.getJeton().getValue()==room.getJetonValue()) {
@@ -137,6 +170,36 @@ public class RoomService  implements IRoomService{
     @Override
     public Immobilier getImmobiliereByRoom(long idRoom) {
         return iImmobilierRepository.getImmobilierByRoom_Id(idRoom);
+    }
+
+    @Override
+    public List<Room> getListRoomByUser(long idUser) {
+        return roomRepository.getRoomsByUser_Id(idUser);
+    }
+
+    @Override
+    public Room getRoomById(long idRoom) {
+        return roomRepository.getRoomById(idRoom);
+    }
+
+    @Override
+    public void ExitRoom(long idUser) {
+        User user=iUserRepository.findById(idUser).get();
+        user.setRoom(null);
+        iUserRepository.save(user);
+    }
+
+    @Override
+    public void updateTimeRoom(long idRoom,long timeRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+        room.setTimeRoom(timeRoom);
+        roomRepository.save(room);
+    }
+
+    @Override
+    public float getRoomTime(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+        return room.getTimeRoom();
     }
 
 

@@ -12,8 +12,9 @@ public interface IJetonService {
 
     void deleteJeton(Long id);
 
-    Jeton updateJeton(Jeton j);
+    Jeton updateJeton(Jeton j,long iduser,long idRoom);
 
     Jeton getJetonByUser(long userId);
     List<Jeton> getJetonbyRoom(long idRoom);
+    Jeton updateUserBidAmount(long jetonId,double amount);
 }

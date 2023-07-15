@@ -66,13 +66,24 @@ public class UserService implements IUserService {
 
     @Override
     public User update(User c) {
-        userRepository.save(c);
-        return c;
+        if(c.getPassword()!=null){
+            c.setPassword(passwordEncoder.encode(c.getPassword()));
+        }
+        User user = userRepository.findBySocialId(c.getSocialId()).orElseThrow(()->new RuntimeException("user not found"));
+        user.setFirstName(c.getFirstName());
+        user.setLastName(c.getLastName());
+        user.setRole(c.getRole());
+        user.setAddress(c.getAddress());
+        user.setCin(c.getCin());
+        user.setAge(c.getAge());
+        return  userRepository.save(c);
+
     }
 
     @Override
     public User getCurrentInfo(){
         UserDetailsImpl userDetails = authService.getCurrent();
-        return userRepository.findByEmail(userDetails.getEmail()).orElse(null);
+        System.out.println(userDetails.getEmail());
+        return userRepository.findByEmail(userDetails.getEmail()).orElseThrow(()->new RuntimeException("user not found"));
     }
 }

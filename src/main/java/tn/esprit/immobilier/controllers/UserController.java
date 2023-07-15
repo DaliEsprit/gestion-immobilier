@@ -8,6 +8,7 @@ import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.security.jwt.JwtResponse;
 import tn.esprit.immobilier.services.IUserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -23,19 +24,17 @@ public class UserController {
         return ResponseEntity.ok(userService.createUser(user));
     }
     @GetMapping("/current")
-    public ResponseEntity getCurrentInfo(){
-        try {
-            userService. getCurrentInfo();
-
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.CONFLICT).build() ;
-
-        }
-        return ResponseEntity.accepted().build() ;
+    public ResponseEntity getCurrentInfo( HttpServletRequest req){
+        return ResponseEntity.ok(userService.getCurrentInfo()) ;
     }
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
         return userService.retrieveAllReservation();
+    }
+
+    @PutMapping
+    public ResponseEntity<User> getAllUsers(@RequestBody User user){
+        return ResponseEntity.ok(userService.update(user));
     }
 
 }

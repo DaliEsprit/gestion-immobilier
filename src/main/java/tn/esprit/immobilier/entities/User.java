@@ -6,6 +6,8 @@ import tn.esprit.immobilier.entities.enums.RolesTypes;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,10 +35,14 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Jeton jeton;
+    private String socialId;
     private boolean mailVerified=false;
     String password;
     boolean enabled=true;
     @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     Room room;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<Room> roomList=new ArrayList<>();
 }
