@@ -1,10 +1,14 @@
 package tn.esprit.immobilier.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.security.jwt.JwtResponse;
 import tn.esprit.immobilier.services.IUserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -16,16 +20,21 @@ public class UserController {
     IUserService userService;
 
     @PostMapping
-    public User create(@RequestBody User user){
-        return userService.createUser(user);
+    public ResponseEntity<JwtResponse> create(@RequestBody User user){
+        return ResponseEntity.ok(userService.createUser(user));
     }
     @GetMapping("/current")
-    public User getCurrentInfo(){
-        return userService. getCurrentInfo();
+    public ResponseEntity getCurrentInfo( HttpServletRequest req){
+        return ResponseEntity.ok(userService.getCurrentInfo()) ;
     }
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers(){
         return userService.retrieveAllReservation();
+    }
+
+    @PutMapping
+    public ResponseEntity<User> getAllUsers(@RequestBody User user){
+        return ResponseEntity.ok(userService.update(user));
     }
 
 }

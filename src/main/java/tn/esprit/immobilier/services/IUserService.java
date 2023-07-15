@@ -1,11 +1,12 @@
 package tn.esprit.immobilier.services;
 
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.security.jwt.JwtResponse;
 
 import java.util.List;
 
 public interface IUserService {
-    User createUser(User user);
+    JwtResponse createUser(User user);
 
     List<User> retrieveAllReservation();
 
