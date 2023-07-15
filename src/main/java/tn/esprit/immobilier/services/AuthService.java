@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.dto.LoginDTO;
 import tn.esprit.immobilier.dto.SocialLoginDto;
 import tn.esprit.immobilier.dto.UpdatePwdDTO;
+import tn.esprit.immobilier.entities.Position;
 import tn.esprit.immobilier.entities.Token;
 import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.entities.enums.RolesTypes;
+import tn.esprit.immobilier.repositories.IPositionRepository;
 import tn.esprit.immobilier.repositories.ITokenRepository;
 import tn.esprit.immobilier.repositories.IUserRepository;
 import tn.esprit.immobilier.security.jwt.JwtResponse;
@@ -34,6 +36,7 @@ public class AuthService implements IAuthService {
      IUserRepository userRepository;
 
     AuthenticationManager authenticationManager;
+    IPositionRepository positionRepository;
 
     JwtUtils jwtUtils;
     PasswordEncoder passwordEncoder;
@@ -83,7 +86,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public void updatePassword(String token,String password) {
+    public void updatePassword(String token, String password) {
        Token token1= tokenRepository.findByTokenAndEnabled(token,true).orElseThrow(()->new RuntimeException("Invalid or expired token"));
         User user = token1.getUser();
         user.setPassword(passwordEncoder.encode(password));
@@ -123,7 +126,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public JwtResponse socialLogin(SocialLoginDto socialLoginDto){
+    public JwtResponse socialLogin(SocialLoginDto socialLoginDto,String longitude,String latitude){
         User user = userRepository.findBySocialId(socialLoginDto.getId()).orElse(new User());
         if(user.getEmail()!=null){
             return loginUser(user);
@@ -136,6 +139,9 @@ public class AuthService implements IAuthService {
         user.setSocialId(socialLoginDto.getId());
         user.setRole(RolesTypes.ROLE_GUEST);
 
-        return loginUser(userRepository.save(user));
+        User savedUser=userRepository.save(user);
+        Position position = new Position(0L,longitude,latitude,null,savedUser);
+        positionRepository.save(position);
+        return loginUser(savedUser);
     }
 }

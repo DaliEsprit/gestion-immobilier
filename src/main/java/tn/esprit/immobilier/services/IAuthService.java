@@ -21,5 +21,5 @@ public interface IAuthService {
 
     void updatePwd(UpdatePwdDTO updatePwdDTO);
 
-    JwtResponse socialLogin(SocialLoginDto socialLoginDto);
+    JwtResponse socialLogin(SocialLoginDto socialLoginDto,String longitude,String latitude);
 }
