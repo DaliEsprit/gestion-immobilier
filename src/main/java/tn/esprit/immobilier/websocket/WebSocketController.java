@@ -13,6 +13,7 @@ public class WebSocketController {
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+
         return chatMessage;
     }
 }

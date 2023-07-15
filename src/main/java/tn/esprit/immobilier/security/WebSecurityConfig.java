@@ -89,7 +89,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
             .and().authorizeRequests().antMatchers("/swagger-ui/**").permitAll()
             .and().authorizeRequests().antMatchers("/v3/**").permitAll()
             .antMatchers("/api/test/**").permitAll()
-        .anyRequest().authenticated();
+        .anyRequest().permitAll();
     
     http.authenticationProvider(authenticationProvider());
 

@@ -45,8 +45,8 @@ public class AuthController {
     }
 
     @PostMapping("/social-login")
-    public ResponseEntity<JwtResponse> socialLogin(@RequestBody SocialLoginDto loginDTO){
-        return ResponseEntity.ok(authService.socialLogin(loginDTO));
+    public ResponseEntity<JwtResponse> socialLogin(@RequestBody SocialLoginDto loginDTO, @RequestParam("long") String longitude, @RequestParam("lat") String latitude){
+        return ResponseEntity.ok(authService.socialLogin(loginDTO,longitude,latitude));
 
     }
 }
