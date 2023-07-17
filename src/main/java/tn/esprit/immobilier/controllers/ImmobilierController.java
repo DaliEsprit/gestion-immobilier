@@ -19,8 +19,13 @@ public class ImmobilierController {
         List<Immobilier> listImmobiliers = immobilierService.retrieveAllImmobilier();
         return listImmobiliers;
     }
+    @GetMapping("/get-by-id/{immobilier-id}")
+    public Immobilier getImmobilierbyId(@PathVariable("immobilier-id") Long immobilierId) {
+        Immobilier listImmobiliers = immobilierService.retrieveImmobilierById(immobilierId);
+        return listImmobiliers;
+    }
     @PostMapping("/add-immobilier")
-    public Immobilier addImmobilier(@RequestBody Immobilier c) {
+    public Long addImmobilier(@RequestBody Immobilier c) {
         return
                 immobilierService.ajouterImmobilier(c);
     }

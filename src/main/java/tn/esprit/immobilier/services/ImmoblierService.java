@@ -19,11 +19,16 @@ public class ImmoblierService implements IImmobilierService {
         List<Immobilier> listImmobilier= ImmoRepository.findAll();
         return listImmobilier;
     }
+    @Override
+    public Immobilier retrieveImmobilierById(Long id) {
+        Immobilier ImmobilierObject= ImmoRepository.findById(id).get();
+        return ImmobilierObject;
+    }
 
     @Override
-    public Immobilier ajouterImmobilier(Immobilier c) {
+    public Long ajouterImmobilier(Immobilier c) {
         ImmoRepository.save(c);
-        return c;
+        return c.getId();
     }
 
     @Override
@@ -37,4 +42,5 @@ public class ImmoblierService implements IImmobilierService {
         ImmoRepository.save(c);
         return c;
     }
+
 }

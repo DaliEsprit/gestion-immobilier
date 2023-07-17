@@ -7,10 +7,11 @@ import java.util.List;
 public interface IAttachmentService {
     List<Attachement> retrieveAllAttachement();
 
-    Attachement ajouterAttachement(Attachement c);
+    Long ajouterAttachement(Attachement c);
 
     void deleteAttachement(Long id);
 
     Attachement updateAttachement(Attachement c);
-
+    List<Attachement> getAttachementbyIdImmobilier(Long id);
+    public Attachement assignAttachmenttoImmobilier(Long c, Long im);
 }

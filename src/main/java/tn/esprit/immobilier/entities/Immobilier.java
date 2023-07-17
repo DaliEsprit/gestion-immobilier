@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
+
 public class Immobilier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +21,14 @@ public class Immobilier implements Serializable {
     private ImmoStatus status;
     private String etat;
     private String description;
-
+    private Long price;
     @ManyToOne
     private User user;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Room room;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Attachement>attachementList;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="immobilier")
+    List<Attachement> attachementList;
 
 }

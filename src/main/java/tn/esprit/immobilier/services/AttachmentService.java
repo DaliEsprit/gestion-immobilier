@@ -3,15 +3,19 @@ package tn.esprit.immobilier.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Attachement;
+import tn.esprit.immobilier.entities.Immobilier;
 import tn.esprit.immobilier.repositories.IAttachmentRepository;
+import tn.esprit.immobilier.repositories.IImmobilierRepository;
 
 import java.util.List;
 @Service
 
 public class AttachmentService implements IAttachmentService{
+
     @Autowired
     IAttachmentRepository AttachRepository;
-
+    @Autowired
+    IImmobilierRepository immoRepository;
 
     @Override
     public List<Attachement> retrieveAllAttachement() {
@@ -20,9 +24,16 @@ public class AttachmentService implements IAttachmentService{
     }
 
     @Override
-    public Attachement ajouterAttachement(Attachement c) {
+    public List<Attachement> getAttachementbyIdImmobilier(Long id) {
+      List<Attachement> listAttachement= AttachRepository.findAttachementsByImmobilier_Id(id);
+        return listAttachement;
+
+    }
+
+    @Override
+    public Long  ajouterAttachement(Attachement c) {
         AttachRepository.save(c);
-        return c;
+        return c.getIdAttachement();
     }
 
     @Override
@@ -35,5 +46,13 @@ public class AttachmentService implements IAttachmentService{
     public Attachement updateAttachement(Attachement c) {
         AttachRepository.save(c);
         return c;
+    }
+    @Override
+    public Attachement assignAttachmenttoImmobilier(Long c, Long im ) {
+        Attachement at = AttachRepository.findById(c).get();
+        Immobilier imo = immoRepository.findById(im).get();
+        at.setImmobilier(imo);
+        return AttachRepository.save(at);
+
     }
 }

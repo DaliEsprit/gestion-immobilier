@@ -8,11 +8,12 @@ import java.util.List;
 public interface IImmobilierService {
 
         List<Immobilier> retrieveAllImmobilier();
-
-    Immobilier ajouterImmobilier(Immobilier c);
+    Immobilier retrieveImmobilierById(Long id);
+    Long  ajouterImmobilier(Immobilier c);
 
         void deleteImmobilier(Long id);
 
     Immobilier updateImmobilier(Immobilier c);
-    }
+
+}
 
