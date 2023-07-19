@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,7 +81,9 @@ public class RoomService  implements IRoomService{
 
     @Override
     public void deleteRoom(Long id) {
-          roomRepository.deleteById(id);
+        Room room =roomRepository.findById(id).get();
+        room.setUser(null);
+        roomRepository.delete(room);
     }
 
     @Override
@@ -90,7 +93,8 @@ public class RoomService  implements IRoomService{
         roomRepository.save(r);
         return r;
     }
-
+    @MessageMapping("/chat")
+    @SendTo("/topic/users")
     @Override
     public List<User> getUsersByRoom(long idRoom) {
         return iUserRepository.getUsersByRoom_Id(idRoom);
