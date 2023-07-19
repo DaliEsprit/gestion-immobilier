@@ -30,14 +30,7 @@ public class ReservationController {
     @PostMapping("/add-reservation/{idimmo}/{iduser}")
     public Reservation addReservation(@RequestBody Reservation r,@PathVariable("idimmo") long idimmo, @PathVariable("iduser") long iduser) {
     	
-    	User x = userService.getCurrentInfo();
-    	
-    	int input_case =4;
-		String title = "Creation nouvelle Reservation";
-		String message = "l' Utilisateur : Mr/Mme. " + " " +x.getFirstName() + " " + x.getLastName() + " " + "qui est : " + " " + x.getRole() 
-		 + " " +"a crée une Reservation";
-		
-		notifService.notifier(input_case, title, message);
+
 		
         return reservationService.ajouterReservation(r,idimmo,iduser);
     }
@@ -46,7 +39,7 @@ public class ReservationController {
         reservationService.deleteReservation(idreservation);
     }
     @PutMapping("/modify-reservation/{idres}/{date}")
-    public Reservation updateReservation(@PathVariable("idres") long idres, @PathVariable("date")Date date) {
+    public Reservation updateReservation(@PathVariable("idres") long idres, @PathVariable("date")String date) {
         return reservationService.updateReservationDate(idres,date);
     }
 }

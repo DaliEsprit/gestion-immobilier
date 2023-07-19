@@ -47,10 +47,10 @@ public class ReservationService implements IReservationService {
 
 
     @Override
-    public Reservation updateReservationDate(Long idres, Date date) {
+    public Reservation updateReservationDate(Long idres, String date) {
 
         Reservation reservation = ReservRepository.findById(idres).get();
-        reservation.setDatereservation(date);
+
 
         return ReservRepository.save(reservation);
     }

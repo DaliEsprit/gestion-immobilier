@@ -15,7 +15,7 @@ public interface IReservationService {
 
 
 
-    public  Reservation updateReservationDate (Long idres , Date date);
+    public  Reservation updateReservationDate (Long idres , String date);
 
 
 

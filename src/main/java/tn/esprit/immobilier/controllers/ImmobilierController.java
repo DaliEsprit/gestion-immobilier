@@ -38,7 +38,7 @@ public class ImmobilierController {
     	
     	User x = userService.getCurrentInfo();
     	
-    	int input_case =1;
+    	int input_case =0; // lechkoun n7eb npushi notification
 		String title = "Creation nouveau Immobilier";
 		String message = "l' Utilisateur : Mr/Mme. " + " " +x.getFirstName() + " " + x.getLastName() + " " + "qui est : " + " " + x.getRole() 
 		 + " " +"a crée un nouveau immobilier pour : " + " " + c.getStatus();

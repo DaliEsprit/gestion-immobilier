@@ -15,7 +15,11 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
-    private Date datereservation;
+    private float PrixTotal;
+    @Temporal(TemporalType.DATE)
+    private Date dateStart;
+    @Temporal(TemporalType.DATE)
+    private Date dateEnd;
 
     @OneToOne
     private Immobilier immobilier;
