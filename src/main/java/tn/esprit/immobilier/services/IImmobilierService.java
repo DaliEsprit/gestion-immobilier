@@ -13,7 +13,7 @@ public interface IImmobilierService {
 
         void deleteImmobilier(Long id);
 
-    Immobilier updateImmobilier(Immobilier c);
+    Long updateImmobilier(Immobilier c, Long id);
 
 }
 

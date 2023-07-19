@@ -8,9 +8,7 @@ import tn.esprit.immobilier.entities.Jeton;
 import java.util.List;
 
 public interface IImmobilierRepository  extends JpaRepository<Immobilier,Long> {
-<<<<<<< Updated upstream
-    Immobilier getImmobilierByRoom_Id(long idRoom);
-=======
 
->>>>>>> Stashed changes
+    Immobilier getImmobilierByRoom_Id(long idRoom);
+
 }

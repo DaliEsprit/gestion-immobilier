@@ -1,6 +1,8 @@
 package tn.esprit.immobilier.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Attachement;
 import tn.esprit.immobilier.entities.Immobilier;
@@ -8,6 +10,8 @@ import tn.esprit.immobilier.repositories.IAttachmentRepository;
 import tn.esprit.immobilier.repositories.IImmobilierRepository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ImmoblierService implements IImmobilierService {
     @Autowired
@@ -38,9 +42,21 @@ public class ImmoblierService implements IImmobilierService {
     }
 
     @Override
-    public Immobilier updateImmobilier(Immobilier c) {
-        ImmoRepository.save(c);
-        return c;
+    public Long updateImmobilier(Immobilier c, Long id) {
+
+        Optional<Immobilier> tutorialData = ImmoRepository.findById(id);
+
+        if (tutorialData.isPresent()) {
+            Immobilier _tutorial = tutorialData.get();
+            _tutorial.setDescription(c.getDescription());
+            _tutorial.setEtat(c.getEtat());
+            _tutorial.setPrice(c.getPrice());
+            ImmoRepository.save(_tutorial);
+            return id ;
+        } else {
+            return id;
+        }
+
     }
 
 }

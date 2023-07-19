@@ -33,8 +33,8 @@ public class ImmobilierController {
     public void removeImmobilier(@PathVariable("immobilier-id") Long immobilierId) {
         immobilierService.deleteImmobilier(immobilierId);
     }
-    @PutMapping("/modify-immobilier")
-    public Immobilier updateImmobilier(@RequestBody Immobilier immobilier) {
-        return immobilierService.updateImmobilier(immobilier);
+    @PutMapping("/modify-immobilier/{id}")
+    public Long updateImmobilier(@PathVariable("id") Long id, @RequestBody Immobilier immobilier) {
+        return immobilierService.updateImmobilier(immobilier, id);
     }
 }
