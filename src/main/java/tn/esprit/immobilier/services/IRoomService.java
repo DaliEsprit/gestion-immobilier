@@ -11,7 +11,7 @@ public interface IRoomService {
 
     void deleteRoom(Long id);
 
-    Room updateRoom(Room r);
+    Room updateRoom(Room r,long userId);
     List<User> getUsersByRoom(long idRoom);
     String assignUserToRoom(long idUser,long idRoom);
     String assignImmobiliereToRoom(long idUser,long idImmo,long idRoom);
@@ -21,6 +21,8 @@ public interface IRoomService {
     void ExitRoom(long idUser,long idRoom);
     void updateTimeRoom(long idRoom,long timeRoom);
     float getRoomTime(long idRoom);
+    long findUserByRoom(long idRoom);
+    User getUserByRoomCreated(long idRoom);
 
 
 }

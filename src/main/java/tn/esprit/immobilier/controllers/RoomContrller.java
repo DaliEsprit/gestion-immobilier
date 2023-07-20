@@ -35,10 +35,10 @@ public class RoomContrller {
     public void removeRoom(@PathVariable("room-id") Long roomid) {
         roomService.deleteRoom(roomid);
     }
-    @PutMapping("/modify-room")
+    @PutMapping("/modify-room/{idUser}")
     @SendTo("/topic/greetings")
-    public Room updateRoom(@RequestBody Room room) {
-        return roomService.updateRoom(room);
+    public Room updateRoom(@RequestBody Room room,@PathVariable("idUser") long idUser) {
+        return roomService.updateRoom(room,idUser);
     }
     @GetMapping("/retrieve-users-by-room/{idRoom}")
     public List<User> getUsersByRoom(@PathVariable("idRoom") long idRoom){
@@ -75,6 +75,14 @@ public class RoomContrller {
     @GetMapping("get-room-time/{idRoom}")
     public float getRoomTime(@PathVariable("idRoom") long idRoom){
         return roomService.getRoomTime(idRoom);
+    }
+    @GetMapping("retrieve-user-by-room/{idRoom}")
+    public long getUserbyRoom( long idroom){
+        return roomService.findUserByRoom(idroom);
+    }
+    @GetMapping("get-user-by-room-created/{idRoom}")
+    public User getUserbyRoomCreated(@PathVariable("idRoom") long idroom){
+        return roomService.getUserByRoomCreated(idroom);
     }
 
 }
