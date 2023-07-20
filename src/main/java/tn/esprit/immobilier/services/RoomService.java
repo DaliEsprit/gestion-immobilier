@@ -87,10 +87,18 @@ public class RoomService  implements IRoomService{
     }
 
     @Override
-    public Room updateRoom(Room r) {
-        roomStatusUpdate(r);
-        r.setClientNumber(getUsersByRoom(r.getId()).size());
-        roomRepository.save(r);
+    public Room updateRoom(Room r,long idUser) {
+        Room room= roomRepository.findById(r.getId()).get();
+        roomStatusUpdate(room);
+        room.setGoldRoom(r.isGoldRoom());
+        room.setPremiumRoom(r.isPremiumRoom());
+        room.setTimeRoom(r.getTimeRoom());
+        room.setApprovedRoom(r.isApprovedRoom());
+        room.setMinAmount(r.getMinAmount());
+        room.setImmobilier(r.getImmobilier());
+        room.setRoomStatus(r.getRoomStatus());
+        room.setClientNumber(getUsersByRoom(r.getId()).size());
+        roomRepository.save(room);
         return r;
     }
     @MessageMapping("/chat")
@@ -209,6 +217,20 @@ public class RoomService  implements IRoomService{
     public float getRoomTime(long idRoom) {
         Room room=roomRepository.findById(idRoom).get();
         return room.getTimeRoom();
+    }
+
+    @Override
+    public long findUserByRoom(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+
+        return room.getUser().getId();
+    }
+
+    @Override
+    public User getUserByRoomCreated(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+
+        return room.getUser();
     }
 
 
