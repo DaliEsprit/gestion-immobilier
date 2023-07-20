@@ -13,4 +13,6 @@ public interface IFeedbackService {
 
     Feedback updateFeedback(Feedback f);
 
+    Feedback affecterAchetuer(Feedback f,Long userId);
+
 }
