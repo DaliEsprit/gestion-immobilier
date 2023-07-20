@@ -74,24 +74,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 //
 //    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 //  }
-<<<<<<< Updated upstream
-=======
+
   
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeRequests().antMatchers("/signIn").permitAll()
-            .and() .authorizeRequests().antMatchers("/auth/**").permitAll()
-            .and().authorizeRequests().antMatchers("/user/recovery/**").permitAll()
-            .and().authorizeRequests().antMatchers("/pdf/generate").permitAll()
-            .and().authorizeRequests().antMatchers("/user").permitAll()
-        .antMatchers("/api/test/**").permitAll()
-        .anyRequest().permitAll();
-    
-    http.authenticationProvider(authenticationProvider());
->>>>>>> Stashed changes
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
