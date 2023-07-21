@@ -51,7 +51,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> retrieveAllReservation() {
+    public List<User> getAll() {
         List<User> listReservation= userRepository.findAll();
         return listReservation;
     }
@@ -85,5 +85,12 @@ public class UserService implements IUserService {
         UserDetailsImpl userDetails = authService.getCurrent();
         System.out.println(userDetails.getEmail());
         return userRepository.findByEmail(userDetails.getEmail()).orElseThrow(()->new RuntimeException("user not found"));
+    }
+
+    @Override
+    public void disable(long id){
+       User user = userRepository.getById(id);
+       user.setEnabled(!user.isEnabled());
+       userRepository.save(user);
     }
 }

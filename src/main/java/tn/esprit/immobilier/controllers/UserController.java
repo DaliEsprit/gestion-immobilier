@@ -1,7 +1,6 @@
 package tn.esprit.immobilier.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.User;
@@ -27,14 +26,18 @@ public class UserController {
     public ResponseEntity getCurrentInfo( HttpServletRequest req){
         return ResponseEntity.ok(userService.getCurrentInfo()) ;
     }
-    @GetMapping("/getAllUsers")
+    @GetMapping
     public List<User> getAllUsers(){
-        return userService.retrieveAllReservation();
+        return userService.getAll();
     }
 
     @PutMapping
     public ResponseEntity<User> getAllUsers(@RequestBody User user){
         return ResponseEntity.ok(userService.update(user));
     }
-
+    @GetMapping("/disable/{id}")
+    public ResponseEntity disable(@PathVariable("id") long id){
+        userService.disable(id);
+       return  ResponseEntity.accepted().build();
+    }
 }
