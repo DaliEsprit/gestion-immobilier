@@ -7,7 +7,9 @@ import tn.esprit.immobilier.entities.Immobilier;
 import tn.esprit.immobilier.entities.Position;
 import tn.esprit.immobilier.services.IAttachmentService;
 import tn.esprit.immobilier.services.IPositionService;
+import tn.esprit.immobilier.services.FilesStoreService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,8 @@ import java.util.List;
 public class AttachmentController {
     @Autowired
     IAttachmentService attachementService;
+    @Autowired
+    FilesStoreService FilesStoreService;
     // http://localhost:8089/api/immobilier/retrieve-all-immobilier
     @GetMapping("/retrieve-all-attachement")
     public List<Attachement> getAttachement() {
@@ -47,6 +51,15 @@ public class AttachmentController {
     public void removeAttachement(@PathVariable("attachement-id") Long attachementId) {
         attachementService.deleteAttachement(attachementId);
     }
+
+    @DeleteMapping("/remove-attachmentbyname/{attachement-name}")
+    public Attachement removeAttachementbyName(@PathVariable("attachement-name") String attachementName) throws IOException {
+        FilesStoreService.deleteAll(attachementName);
+               return attachementService.deleteAttachementbyName(attachementName);
+
+
+    }
+
     @PutMapping("/modify-attachement")
     public Attachement updateAttachement(@RequestBody Attachement attachement) {
         return attachementService.updateAttachement(attachement);

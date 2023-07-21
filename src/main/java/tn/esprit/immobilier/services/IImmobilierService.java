@@ -9,7 +9,7 @@ public interface IImmobilierService {
 
         List<Immobilier> retrieveAllImmobilier();
     Immobilier retrieveImmobilierById(Long id);
-    Long  ajouterImmobilier(Immobilier c);
+    Long  ajouterImmobilier(Immobilier c, Long id);
 
         void deleteImmobilier(Long id);
 
