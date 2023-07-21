@@ -15,7 +15,7 @@ public interface FilesStoreService {
 
     public Resource load(String filename);
 
-    public void deleteAll();
+    public boolean deleteAll(String name) throws IOException;
 
     public Stream<Path> loadAll();
 

@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Attachement;
 import tn.esprit.immobilier.entities.Immobilier;
+import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.repositories.IAttachmentRepository;
 import tn.esprit.immobilier.repositories.IImmobilierRepository;
+import tn.esprit.immobilier.repositories.IUserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +18,8 @@ import java.util.Optional;
 public class ImmoblierService implements IImmobilierService {
     @Autowired
     IImmobilierRepository ImmoRepository;
-
+    @Autowired
+    IUserRepository UserRepository;
 
     @Override
     public List<Immobilier> retrieveAllImmobilier() {
@@ -30,7 +33,9 @@ public class ImmoblierService implements IImmobilierService {
     }
 
     @Override
-    public Long ajouterImmobilier(Immobilier c) {
+    public Long ajouterImmobilier(Immobilier c, Long id) {
+        User user = UserRepository.getById(id);
+        c.setUser(user);
         ImmoRepository.save(c);
         return c.getId();
     }

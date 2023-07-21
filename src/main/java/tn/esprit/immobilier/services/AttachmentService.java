@@ -17,6 +17,8 @@ public class AttachmentService implements IAttachmentService{
     @Autowired
     IImmobilierRepository immoRepository;
 
+
+
     @Override
     public List<Attachement> retrieveAllAttachement() {
         List<Attachement> listAttachement= AttachRepository.findAll();
@@ -43,6 +45,14 @@ public class AttachmentService implements IAttachmentService{
     }
 
     @Override
+    public Attachement deleteAttachementbyName(String name) {
+
+        Attachement att =  AttachRepository.findAttachementsByName(name);
+        AttachRepository.deleteById(att.getIdAttachement());
+return att;
+    }
+
+    @Override
     public Attachement updateAttachement(Attachement c) {
         AttachRepository.save(c);
         return c;
@@ -53,6 +63,6 @@ public class AttachmentService implements IAttachmentService{
         Immobilier imo = immoRepository.findById(im).get();
         at.setImmobilier(imo);
         return AttachRepository.save(at);
-
     }
+
 }

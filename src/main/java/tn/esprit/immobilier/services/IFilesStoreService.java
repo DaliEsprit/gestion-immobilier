@@ -56,8 +56,9 @@ public class IFilesStoreService implements FilesStoreService{
     }
 
     @Override
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(root.toFile());
+    public boolean deleteAll(String name) throws IOException {
+        Path file = root.resolve(name);
+        return FileSystemUtils.deleteRecursively(file);
     }
 
     @Override
@@ -68,6 +69,7 @@ public class IFilesStoreService implements FilesStoreService{
             throw new RuntimeException("Could not load the files!");
         }
     }
+
     @Override
     public  byte[] getImageWithMediaType(String imageName)  throws IOException {
         Path roote = Paths.get("uploads");

@@ -24,10 +24,10 @@ public class ImmobilierController {
         Immobilier listImmobiliers = immobilierService.retrieveImmobilierById(immobilierId);
         return listImmobiliers;
     }
-    @PostMapping("/add-immobilier")
-    public Long addImmobilier(@RequestBody Immobilier c) {
+    @PostMapping("/add-immobilier/{user-id}")
+    public Long addImmobilier(@PathVariable("user-id") Long id, @RequestBody Immobilier c) {
         return
-                immobilierService.ajouterImmobilier(c);
+                immobilierService.ajouterImmobilier(c, id );
     }
     @DeleteMapping("/remove-immobilier/{immobilier-id}")
     public void removeImmobilier(@PathVariable("immobilier-id") Long immobilierId) {

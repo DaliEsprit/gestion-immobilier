@@ -39,7 +39,11 @@ public class uploadFileController {
         {
             return this.FileStoreService.getImageWithMediaType(fileName);
         }
-
+    @DeleteMapping(value ="/delete-files/{id}")
+    public boolean deleteImage(@PathVariable(name = "id") String fileName) throws IOException
+    {
+        return this.FileStoreService.deleteAll(fileName);
+    }
 
 
 }

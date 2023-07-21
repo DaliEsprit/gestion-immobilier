@@ -10,7 +10,7 @@ public interface IAttachmentService {
     Long ajouterAttachement(Attachement c);
 
     void deleteAttachement(Long id);
-
+    Attachement deleteAttachementbyName(String name);
     Attachement updateAttachement(Attachement c);
     List<Attachement> getAttachementbyIdImmobilier(Long id);
     public Attachement assignAttachmenttoImmobilier(Long c, Long im);
