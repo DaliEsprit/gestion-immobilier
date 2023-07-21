@@ -18,6 +18,7 @@ public class Immobilier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private ImmoStatus status;
     private String etat;
     private String description;
