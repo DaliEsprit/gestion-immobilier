@@ -8,11 +8,14 @@ import java.util.List;
 public interface IUserService {
     JwtResponse createUser(User user);
 
-    List<User> retrieveAllReservation();
+    List<User> getAll();
 
     void delete(Long id);
+
 
     User update(User c);
 
     User getCurrentInfo();
+
+    void disable(long id);
 }
