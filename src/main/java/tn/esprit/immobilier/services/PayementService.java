@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Payement;
+import tn.esprit.immobilier.entities.Room;
+import tn.esprit.immobilier.entities.enums.PaymentStatus;
 import tn.esprit.immobilier.repositories.IPayementRepository;
 
 import java.util.List;
@@ -22,7 +24,8 @@ public class PayementService implements IPayementService{
     }
 
     @Override
-    public Payement ajouterPayement(Payement p) {
+    public Payement ajouterPayement(Payement p, PaymentStatus paymentStatus) {
+        p.setPaymentStatus(paymentStatus);
         payRepository.save(p);
         return p;
     }
@@ -32,10 +35,15 @@ public class PayementService implements IPayementService{
         payRepository.deleteById(id);
 
     }
+    public Payement updatePayement(Payement p) {
+       payRepository.save(p);
+    return p;
+    }
 
     @Override
-    public Payement updatePayement(Payement p) {
-        payRepository.save(p);
-        return p;
+    public Payement getPaymentById(long idPay) {
+        Payement payement=payRepository.findById(idPay).get();
+        return payement;
     }
+
 }

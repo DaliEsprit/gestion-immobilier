@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Jeton;
+import tn.esprit.immobilier.entities.enums.JetonStatus;
 import tn.esprit.immobilier.services.IJetonService;
 import tn.esprit.immobilier.services.JetonService;
 
@@ -51,5 +52,9 @@ public class JetonController {
     @PutMapping("/update-jeton-bid-value/{jetonId}/{amount}")
     public Jeton updateJetonBidValue (@PathVariable("jetonId") long jetonid,@PathVariable("amount")double amount){
         return  jetonService.updateUserBidAmount(jetonid,amount);
+    }
+    @PutMapping("/updateJetonStatus/{userId}/{jetonStatus}")
+    public Jeton updateJetonStatus (@PathVariable("userId") long userid, @PathVariable("jetonStatus")JetonStatus jetonStatus){
+        return jetonService.updateJetonStatus(userid, jetonStatus);
     }
 }

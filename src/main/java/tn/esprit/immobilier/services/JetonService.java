@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.immobilier.entities.Jeton;
 import tn.esprit.immobilier.entities.Room;
 import tn.esprit.immobilier.entities.User;
+import tn.esprit.immobilier.entities.enums.JetonStatus;
 import tn.esprit.immobilier.repositories.IJetonRepository;
 import tn.esprit.immobilier.repositories.IRoomRepository;
 import tn.esprit.immobilier.repositories.IUserRepository;
@@ -70,5 +71,13 @@ public class JetonService implements IJetonService {
         Jeton jeton=jetonRepository.findById(jetonid).get();
         jeton.setBidValue(amount);
         return jetonRepository.save(jeton);
+    }
+
+    @Override
+    public Jeton updateJetonStatus(long userId, JetonStatus jetonStatus) {
+    User user=iUserRepository.findById(userId).get();
+    user.getJeton().setJetonStatus(jetonStatus);
+         iUserRepository.save(user);
+         return user.getJeton();
     }
 }
