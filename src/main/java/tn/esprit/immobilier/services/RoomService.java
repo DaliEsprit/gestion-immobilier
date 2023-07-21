@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,17 +81,28 @@ public class RoomService  implements IRoomService{
 
     @Override
     public void deleteRoom(Long id) {
-          roomRepository.deleteById(id);
+        Room room =roomRepository.findById(id).get();
+        room.setUser(null);
+        roomRepository.delete(room);
     }
 
     @Override
-    public Room updateRoom(Room r) {
-        roomStatusUpdate(r);
-        r.setClientNumber(getUsersByRoom(r.getId()).size());
-        roomRepository.save(r);
+    public Room updateRoom(Room r,long idUser) {
+        Room room= roomRepository.findById(r.getId()).get();
+        roomStatusUpdate(room);
+        room.setGoldRoom(r.isGoldRoom());
+        room.setPremiumRoom(r.isPremiumRoom());
+        room.setTimeRoom(r.getTimeRoom());
+        room.setApprovedRoom(r.isApprovedRoom());
+        room.setMinAmount(r.getMinAmount());
+        room.setImmobilier(r.getImmobilier());
+        room.setRoomStatus(r.getRoomStatus());
+        room.setClientNumber(getUsersByRoom(r.getId()).size());
+        roomRepository.save(room);
         return r;
     }
-
+    @MessageMapping("/chat")
+    @SendTo("/topic/users")
     @Override
     public List<User> getUsersByRoom(long idRoom) {
         return iUserRepository.getUsersByRoom_Id(idRoom);
@@ -205,6 +217,20 @@ public class RoomService  implements IRoomService{
     public float getRoomTime(long idRoom) {
         Room room=roomRepository.findById(idRoom).get();
         return room.getTimeRoom();
+    }
+
+    @Override
+    public long findUserByRoom(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+
+        return room.getUser().getId();
+    }
+
+    @Override
+    public User getUserByRoomCreated(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+
+        return room.getUser();
     }
 
 

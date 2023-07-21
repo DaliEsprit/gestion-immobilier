@@ -15,6 +15,12 @@ public class Feedback {
     private Long idFb;
     private String ScreenType;
     private String Description;
+    private int rating;
+    private int likes;
+    private int dislikes;
+
+
+
 
 
     @ManyToOne(cascade = CascadeType.ALL)
