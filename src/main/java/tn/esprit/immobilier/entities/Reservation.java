@@ -1,5 +1,6 @@
 package tn.esprit.immobilier.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,13 +15,14 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
-
-    @OneToOne
+    private String dateReservation;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     private Immobilier immobilier;
     @ManyToOne(cascade = CascadeType.ALL)
-    User Acheteur;
-    @ManyToOne(cascade = CascadeType.ALL)
-    User Vendeur;
+    @JsonIgnore
+    User user;
     @OneToOne
+    @JsonIgnore
     private Room rooms;
 }

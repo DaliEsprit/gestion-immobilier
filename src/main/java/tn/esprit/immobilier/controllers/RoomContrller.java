@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.immobilier.entities.Immobilier;
+import tn.esprit.immobilier.entities.Reservation;
 import tn.esprit.immobilier.entities.Room;
 import tn.esprit.immobilier.entities.User;
 import tn.esprit.immobilier.entities.enums.RoomStatus;
@@ -35,10 +36,10 @@ public class RoomContrller {
     public void removeRoom(@PathVariable("room-id") Long roomid) {
         roomService.deleteRoom(roomid);
     }
-    @PutMapping("/modify-room/{idUser}")
+    @PutMapping("/modify-room")
     @SendTo("/topic/greetings")
-    public Room updateRoom(@RequestBody Room room,@PathVariable("idUser") long idUser) {
-        return roomService.updateRoom(room,idUser);
+    public Room updateRoom(@RequestBody Room room) {
+        return roomService.updateRoom(room);
     }
     @GetMapping("/retrieve-users-by-room/{idRoom}")
     public List<User> getUsersByRoom(@PathVariable("idRoom") long idRoom){
@@ -83,6 +84,14 @@ public class RoomContrller {
     @GetMapping("get-user-by-room-created/{idRoom}")
     public User getUserbyRoomCreated(@PathVariable("idRoom") long idroom){
         return roomService.getUserByRoomCreated(idroom);
+    }
+    @GetMapping("retrieve-Immobilier-by-room/{idRoom}")
+    public Immobilier getImmolierByRoom(@PathVariable("idRoom") long idRoom){
+        return roomService.getImmobiliereByRoom(idRoom);
+    }
+    @PostMapping ("room-reservation/{idUser}/{idImmo}/{idRoom}")
+    public Reservation RoomReservation(@PathVariable("idUser") long idUser,@PathVariable("idImmo") long idImmo,@PathVariable("idRoom") long idRoom){
+        return roomService.reserveImmobilieretoUserByRoom(idUser,idImmo,idRoom);
     }
 
 }
