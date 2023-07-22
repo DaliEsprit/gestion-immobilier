@@ -16,6 +16,7 @@ import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +34,8 @@ public class RoomService  implements IRoomService{
     IUserRepository iUserRepository;
     @Autowired
     private IJetonRepository iJetonRepository;
+    @Autowired
+    private IReservationRepository iReservationRepository;
 
     @Override
     public List<Room> retrieveAllRoom() {
@@ -87,7 +90,7 @@ public class RoomService  implements IRoomService{
     }
 
     @Override
-    public Room updateRoom(Room r,long idUser) {
+    public Room updateRoom(Room r) {
         Room room= roomRepository.findById(r.getId()).get();
         roomStatusUpdate(room);
         room.setGoldRoom(r.isGoldRoom());
@@ -232,6 +235,26 @@ public class RoomService  implements IRoomService{
         Room room=roomRepository.findById(idRoom).get();
 
         return room.getUser();
+    }
+
+    @Override
+    public Immobilier getImmobilierByRoom(long idRoom) {
+        Room room=roomRepository.findById(idRoom).get();
+        return room.getImmobilier();
+    }
+
+    @Override
+    public Reservation reserveImmobilieretoUserByRoom( long idUser, long idImmo, long idRoom) {
+        Reservation reservation=new Reservation();
+        Date date =new Date();
+        User user=iUserRepository.findById(idUser).get();
+        Immobilier immobilier=iImmobilierRepository.findById(idImmo).get();
+        Room room=roomRepository.findById(idRoom).get();
+        reservation.setUser(user);
+        reservation.setImmobilier(immobilier);
+        reservation.setRooms(room);
+        reservation.setDateReservation(date.toString());
+        return iReservationRepository.save(reservation) ;
     }
 
 
