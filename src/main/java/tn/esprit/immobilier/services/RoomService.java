@@ -199,6 +199,7 @@ public class RoomService  implements IRoomService{
         Room room=roomRepository.findById(idRoom).get();
         User user=iUserRepository.findById(idUser).get();
         user.setRoom(null);
+        user.getJeton().setRoom(null);
         room.setClientNumber(room.getClientNumber()-1);
         if(room.getClientNumber()==-1)
             room.setClientNumber(0);

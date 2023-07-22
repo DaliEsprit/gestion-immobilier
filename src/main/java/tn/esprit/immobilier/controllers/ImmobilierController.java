@@ -37,4 +37,12 @@ public class ImmobilierController {
     public Long updateImmobilier(@PathVariable("id") Long id, @RequestBody Immobilier immobilier) {
         return immobilierService.updateImmobilier(immobilier, id);
     }
+    @GetMapping("/retrieve-immobiliere-by-user/{idUser}")
+    public List<Immobilier> getlistImmobilierebyUser(@PathVariable("idUser") long idUser){
+        return immobilierService.retrieveImmobileresByUser(idUser);
+    }
+    @GetMapping("/retrieve-immo-by-name/{name}")
+    public Immobilier getImmoByName(@PathVariable("name") String name){
+        return immobilierService.getImmoByName(name);
+    }
 }
