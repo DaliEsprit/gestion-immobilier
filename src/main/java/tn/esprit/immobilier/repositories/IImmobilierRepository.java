@@ -10,5 +10,6 @@ import java.util.List;
 public interface IImmobilierRepository  extends JpaRepository<Immobilier,Long> {
 
     Immobilier getImmobilierByRoom_Id(long idRoom);
+    Immobilier getImmobilierByName(String name);
 
 }

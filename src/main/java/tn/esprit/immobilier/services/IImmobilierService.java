@@ -14,6 +14,8 @@ public interface IImmobilierService {
         void deleteImmobilier(Long id);
 
     Long updateImmobilier(Immobilier c, Long id);
+    List<Immobilier> retrieveImmobileresByUser(long iddUser);
+    Immobilier getImmoByName(String name);
 
 }
 

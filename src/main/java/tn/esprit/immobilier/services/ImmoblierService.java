@@ -13,6 +13,7 @@ import tn.esprit.immobilier.repositories.IUserRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ImmoblierService implements IImmobilierService {
@@ -48,7 +49,6 @@ public class ImmoblierService implements IImmobilierService {
 
     @Override
     public Long updateImmobilier(Immobilier c, Long id) {
-
         Optional<Immobilier> tutorialData = ImmoRepository.findById(id);
 
         if (tutorialData.isPresent()) {
@@ -63,5 +63,17 @@ public class ImmoblierService implements IImmobilierService {
         }
 
     }
+
+    @Override
+    public List<Immobilier> retrieveImmobileresByUser(long iddUser) {
+        User user=UserRepository.findById(iddUser).get();
+        return user.getImmobiliers();
+        }
+
+    @Override
+    public Immobilier getImmoByName(String name) {
+        return ImmoRepository.getImmobilierByName(name);
+    }
+
 
 }
