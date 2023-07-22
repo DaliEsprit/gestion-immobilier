@@ -93,5 +93,13 @@ public class RoomContrller {
     public Reservation RoomReservation(@PathVariable("idUser") long idUser,@PathVariable("idImmo") long idImmo,@PathVariable("idRoom") long idRoom){
         return roomService.reserveImmobilieretoUserByRoom(idUser,idImmo,idRoom);
     }
+    @GetMapping("retrieve-all-reservation-by-room")
+    public List<Reservation> retrieveAllReservation(){
+        return roomService.retrieveAllReservation();
+    }
+    @GetMapping("reservationRef/{idRes}")
+    public List<Long>  reserRef(@PathVariable("idRes") long idRes){
+        return  roomService.retrieveReservationReference(idRes);
+    }
 
 }

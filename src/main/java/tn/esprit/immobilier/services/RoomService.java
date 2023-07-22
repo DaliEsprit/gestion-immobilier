@@ -15,10 +15,8 @@ import tn.esprit.immobilier.entities.enums.RoomStatus;
 import tn.esprit.immobilier.repositories.*;
 import tn.esprit.immobilier.security.jwt.AuthTokenFilter;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -255,6 +253,23 @@ public class RoomService  implements IRoomService{
         reservation.setRooms(room);
         reservation.setDateReservation(date.toString());
         return iReservationRepository.save(reservation) ;
+    }
+
+    @Override
+    public List<Reservation> retrieveAllReservation() {
+        List<Reservation> reservationList=iReservationRepository.findAll();
+        return reservationList.stream().filter(res->res.getRooms()!=null).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> retrieveReservationReference(long idres) {
+        List<Long> references=new ArrayList<>();
+        Reservation reservation =iReservationRepository.findById(idres).get();
+        references.add(reservation.getRooms().getId());
+        references.add(reservation.getImmobilier().getId());
+        references.add(reservation.getUser().getId());
+
+        return references;
     }
 
 
