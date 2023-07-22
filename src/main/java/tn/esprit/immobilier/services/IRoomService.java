@@ -25,6 +25,7 @@ public interface IRoomService {
     User getUserByRoomCreated(long idRoom);
     Immobilier getImmobilierByRoom(long idRoom);
     Reservation reserveImmobilieretoUserByRoom( long idUser,long idImmo,long idRoom );
-
+    List<Reservation> retrieveAllReservation();
+    List<Long> retrieveReservationReference(long idres);
 
 }
